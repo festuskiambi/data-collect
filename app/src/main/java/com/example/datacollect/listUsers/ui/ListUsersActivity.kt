@@ -2,6 +2,7 @@ package com.example.datacollect.listUsers.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -37,6 +38,8 @@ class ListUsersActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        Toast.makeText(this, "click on '+' to add a new user" , Toast.LENGTH_SHORT).show()
+
         viewModel.handleEvent(ListUserEvent.OnStart)
         setUpButtons()
         setUpAdapter()
