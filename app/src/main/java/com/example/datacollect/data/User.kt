@@ -11,25 +11,25 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users")
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    var id: Int = 0,
 
     @ColumnInfo(name = "first_name")
-    val firstName: String,
+    var firstName: String ="",
 
     @ColumnInfo(name = "last_name")
-    val lastName: String,
+    var lastName: String ="",
 
     @ColumnInfo(name = "id_number")
-    val idNumber: Int,
+    var idNumber: Int =0,
 
-    val lat: Int,
+    var lat: Float = 0f,
 
-    val long: Int,
+    var long: Float = 0f,
 
     @ColumnInfo(name = "building_image_url")
-    val buildingImageUrl: String,
+    var buildingImageUrl: String ="",
 
     @ColumnInfo(name = "product_info")
-    val productInfo: String
+    var productInfo: String = ""
 
 )
