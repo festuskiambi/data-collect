@@ -1,8 +1,10 @@
 package com.example.datacollect.adduser.viewmodel
 
 import com.example.datacollect.adduser.ui.AddUserEvent
+import com.example.datacollect.data.User
 import com.example.datacollect.data.source.IUserDataSource
 import com.example.kittytinder.common.BaseViewModel
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -15,12 +17,21 @@ class AddUserViewModel(
 ) : BaseViewModel<AddUserEvent>(uiContext) {
 
     override fun handleEvent(event: AddUserEvent) {
-        when(event){
+        when (event) {
             is AddUserEvent.OnSave -> saveUserDataToLocalStorage(event)
         }
     }
 
-    private fun saveUserDataToLocalStorage(event: AddUserEvent.OnSave) {
+    private fun saveUserDataToLocalStorage(event: AddUserEvent.OnSave)= launch {
+        val user = User(
+            firstName = event.firstName,
+            lastName = event.lastName,
+            lat = event.lat,
+            long = event.long,
+            buildingImageUrl = event.buildingImageUrl,
+            productInfo = event.productInfo
+        )
 
+        userDataSource.saveUser(user)
     }
 }

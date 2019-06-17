@@ -12,8 +12,8 @@ import com.example.datacollect.data.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM users")
-    fun queryPosts(): List<User>
+    fun queryUsers(): List<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPost(user: User)
+    fun insertUser(user: User)
 }
