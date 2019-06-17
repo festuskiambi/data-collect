@@ -15,5 +15,6 @@ class UserRepository @Inject constructor(private val usersDao: UserDao): IUserDa
     }
 
     override suspend fun getUsers()= withContext(Dispatchers.IO) {
+         usersDao.queryUsers()
     }
 }

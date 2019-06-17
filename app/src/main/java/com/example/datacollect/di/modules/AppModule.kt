@@ -41,5 +41,4 @@ class AppModule(val app: Application) {
     fun provideAddUserViewModelFactory(userDataSource: IUserDataSource): AddUserViewModelFactory {
         return AddUserViewModelFactory(userDataSource)
     }
-
 }

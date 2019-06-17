@@ -7,7 +7,7 @@ import com.example.datacollect.data.User
  */
 interface IUserDataSource {
 
-    suspend fun getUsers()
+    suspend fun getUsers(): List<User>
 
     suspend fun saveUser(user: User)
 }

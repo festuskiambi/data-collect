@@ -1,7 +1,7 @@
 package com.example.datacollect.di.modules
 
 import com.example.datacollect.adduser.ui.AddUserActivity
-import com.example.datacollect.listUsers.ListUsersActivity
+import com.example.datacollect.listUsers.ui.ListUsersActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
