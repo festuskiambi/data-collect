@@ -20,7 +20,7 @@ data class User(
     var lastName: String = "",
 
     @ColumnInfo(name = "id_number")
-    var idNumber: Int = 0,
+    var idNumber: String = "",
 
     var lat: Double = 0.0,
 

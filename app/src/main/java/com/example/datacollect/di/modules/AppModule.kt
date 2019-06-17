@@ -7,6 +7,7 @@ import com.example.datacollect.data.source.IUserDataSource
 import com.example.datacollect.data.source.UserRepository
 import com.example.datacollect.data.source.local.Database
 import com.example.datacollect.data.source.local.UserDao
+import com.example.datacollect.listUsers.viewmodel.ListUserViewModelFactory
 
 import dagger.Module
 import dagger.Provides
@@ -40,5 +41,10 @@ class AppModule(val app: Application) {
     @Provides
     fun provideAddUserViewModelFactory(userDataSource: IUserDataSource): AddUserViewModelFactory {
         return AddUserViewModelFactory(userDataSource)
+    }
+
+    @Provides
+    fun provideListUserViewModelFactory(userDataSource: IUserDataSource): ListUserViewModelFactory {
+        return ListUserViewModelFactory(userDataSource)
     }
 }

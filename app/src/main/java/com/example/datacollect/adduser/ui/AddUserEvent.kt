@@ -8,7 +8,7 @@ sealed class AddUserEvent {
     data class OnSave(
         val firstName: String,
         var lastName: String ,
-        var idNumber: Int ,
+        var idNumber: String ,
         var lat: Double  ,
         var long: Double ,
         var buildingImageUrl: String ,

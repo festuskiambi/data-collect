@@ -3,11 +3,16 @@ package com.example.datacollect.listUsers.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.datacollect.R
 import com.example.datacollect.adduser.ui.AddUserActivity
 import com.example.datacollect.listUsers.viewmodel.ListUserViewModel
 import com.example.datacollect.listUsers.viewmodel.ListUserViewModelFactory
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_list_users.*
 import javax.inject.Inject
 
@@ -17,10 +22,13 @@ class ListUsersActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ListUserViewModelFactory
     private lateinit var viewModel: ListUserViewModel
 
+    private lateinit var adapter: UsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_users)
+
+        AndroidInjection.inject(this)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(ListUserViewModel::class.java)
@@ -31,11 +39,30 @@ class ListUsersActivity : AppCompatActivity() {
     private fun initViews() {
         viewModel.handleEvent(ListUserEvent.OnStart)
         setUpButtons()
+        setUpAdapter()
         observeViewModels()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.handleEvent(ListUserEvent.OnStart)
+    }
+
+    private fun setUpAdapter() {
+        adapter = UsersAdapter()
+        adapter.event.observe(this,
+            Observer { viewModel.handleEvent(it) })
+        rv_users.adapter = adapter
+    }
+
     private fun observeViewModels() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        rv_users.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        viewModel.usersList.observe(
+            this,
+            Observer {userList ->
+                adapter.submitList(userList)
+            }
+        )
     }
 
     private fun setUpButtons() {

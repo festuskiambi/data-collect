@@ -55,7 +55,7 @@ class AddUserActivity : AppCompatActivity() {
     private var currentLongitude = 0.0
     private var firstName = ""
     private var lastName = ""
-    private var idNumber: Int? = 0
+    private var idNumber = ""
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -68,17 +68,15 @@ class AddUserActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(AddUserViewModel::class.java)
 
-        if (checkAndRequestPermissions()) {
-            initViews()
-        }
-
+        checkAndRequestPermissions()
+        initViews()
     }
 
     private fun initViews() {
+        getLocation()
         setUpButtons()
         setupQrCodeScanner()
         setQRCodeScannerCallbacks()
-        getLocation()
     }
 
 
@@ -101,12 +99,12 @@ class AddUserActivity : AppCompatActivity() {
     private fun getUserInputs() {
         firstName = et_first_name.text.toString()
         lastName = et_last_name.text.toString()
-        idNumber = et_id_number.text.toString().toIntOrNull()
+        idNumber = et_id_number.text.toString()
 
         if (firstName.isEmpty()
             || currentBuildingPhotoPath.isEmpty()
             || currentProductInfo.isEmpty()
-            || idNumber == null
+            || idNumber.isEmpty()
         ) {
             showErrorState()
         } else {
@@ -115,19 +113,20 @@ class AddUserActivity : AppCompatActivity() {
                 AddUserEvent.OnSave(
                     firstName,
                     lastName,
-                    idNumber!!,
+                    idNumber,
                     currentLatitude,
                     currentLongitude,
                     currentBuildingPhotoPath,
                     currentProductInfo
                 )
             )
+
+            onBackPressed()
         }
     }
 
     private fun showErrorState() {
         Toast.makeText(this, "Fill in Blank fields", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun setupQrCodeScanner() {
@@ -221,7 +220,7 @@ class AddUserActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        codeScanner.releaseResources()
+//        codeScanner.releaseResources()
         super.onPause()
     }
 
