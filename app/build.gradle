@@ -55,6 +55,7 @@ dependencies {
     implementation deps.support.design
     implementation deps.support.core_ktx
     implementation deps.support.annotations
+    implementation deps.support.play_services_location
 
     //kotlin
     implementation deps.kotlin.stdlib

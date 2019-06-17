@@ -14,20 +14,20 @@ data class User(
     var id: Int = 0,
 
     @ColumnInfo(name = "first_name")
-    var firstName: String ="",
+    var firstName: String = "",
 
     @ColumnInfo(name = "last_name")
-    var lastName: String ="",
+    var lastName: String = "",
 
     @ColumnInfo(name = "id_number")
-    var idNumber: Int =0,
+    var idNumber: Int = 0,
 
-    var lat: Float = 0f,
+    var lat: Double = 0.0,
 
-    var long: Float = 0f,
+    var long: Double = 0.0,
 
     @ColumnInfo(name = "building_image_url")
-    var buildingImageUrl: String ="",
+    var buildingImageUrl: String = "",
 
     @ColumnInfo(name = "product_info")
     var productInfo: String = ""

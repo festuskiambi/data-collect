@@ -1,7 +1,8 @@
-package com.example.datacollect.adduser
+package com.example.datacollect.adduser.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,8 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.datacollect.R
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_add_user.*
 import kotlinx.android.synthetic.main.scanner_layout.*
 import java.io.File
@@ -31,21 +34,31 @@ class AddUserActivity : AppCompatActivity() {
     val REQUEST_TAKE_PHOTO = 100
     private var currentBuildingPhotoPath: String = ""
     private var currentProductInfo: String = ""
+    private  var currentLatitude:Double = 0.0
+    private  var currentLongitude: Double = 0.0
+
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_user)
 
         initViews()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
     }
 
     private fun initViews() {
 
         setUpButtons()
         setupQrCodeScanner()
-        setScannerCallbacks()
+        setQRCodeScannerCallbacks()
+        getLocation()
 
     }
+
 
     private fun setupQrCodeScanner() {
         codeScanner = CodeScanner(this, scannerView)
@@ -58,7 +71,7 @@ class AddUserActivity : AppCompatActivity() {
         codeScanner.isFlashEnabled = false
     }
 
-    private fun setScannerCallbacks() {
+    private fun setQRCodeScannerCallbacks() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 scan_layout.visibility = View.INVISIBLE
@@ -78,6 +91,18 @@ class AddUserActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
+                location?.also {
+                   currentLatitude = location.latitude
+                    currentLongitude = location.longitude
+                }
+            }
     }
 
     private fun setUpButtons() {
