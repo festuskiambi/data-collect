@@ -26,5 +26,5 @@ class AppModule(val app: Application) {
 
     @Provides
     @Singleton
-    fun provideusersDao(database: Database) = database.userDao()
+    fun provideUsersDao(database: Database) = database.userDao()
 }

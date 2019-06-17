@@ -10,10 +10,10 @@ import com.example.datacollect.data.User
  * Created by Festus Kiambi on 6/17/19.
  */
 @Dao
-abstract  class UserDao {
+interface UserDao {
     @Query("SELECT * FROM users")
-    abstract fun queryPosts(): List<User>
+    fun queryPosts(): List<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertPost(user: User)
+    fun insertPost(user: User)
 }
