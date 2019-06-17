@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DataCollect</string>
+  <string name="btn_bulding_image">Capture Customer Bulding</string>
+  <string name="Btn_scan_code">Scan Product Qr Code</string>
+  <string name="btn_save">Save</string>
+  <string name="hint_id_number">Id Number</string>
+  <string name="hint_last_name">Last Name</string>
+  <string name="hint_first_name">First Name</string>
 </resources>
