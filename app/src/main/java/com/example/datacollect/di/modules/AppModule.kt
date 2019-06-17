@@ -2,7 +2,11 @@ package com.example.datacollect.di.modules
 
 import android.app.Application
 import androidx.room.Room
+import com.example.datacollect.adduser.viewmodel.AddUserViewModelFactory
+import com.example.datacollect.data.source.IUserDataSource
+import com.example.datacollect.data.source.UserRepository
 import com.example.datacollect.data.source.local.Database
+import com.example.datacollect.data.source.local.UserDao
 
 import dagger.Module
 import dagger.Provides
@@ -27,4 +31,15 @@ class AppModule(val app: Application) {
     @Provides
     @Singleton
     fun provideUsersDao(database: Database) = database.userDao()
+
+    @Provides
+    fun provideUserDataSource( userDao: UserDao): IUserDataSource{
+        return UserRepository(userDao)
+    }
+
+    @Provides
+    fun provideAddUserViewModelFactory(userDataSource: IUserDataSource): AddUserViewModelFactory {
+        return AddUserViewModelFactory(userDataSource)
+    }
+
 }

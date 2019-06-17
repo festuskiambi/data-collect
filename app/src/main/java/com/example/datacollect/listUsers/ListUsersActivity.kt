@@ -8,12 +8,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.datacollect.R
-import com.example.datacollect.adduser.AddUserActivity
+import com.example.datacollect.adduser.ui.AddUserActivity
 import kotlinx.android.synthetic.main.activity_list_users.*
 
 class ListUsersActivity : AppCompatActivity() {
