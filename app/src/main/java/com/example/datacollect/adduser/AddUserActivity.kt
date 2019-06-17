@@ -1,9 +1,10 @@
-package com.example.datacollect
+package com.example.datacollect.adduser
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.datacollect.R
 
-class MainActivity : AppCompatActivity() {
+class AddUserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
