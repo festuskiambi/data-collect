@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.datacollect.R
+import com.example.datacollect.adduser.AddUserActivity
+import kotlinx.android.synthetic.main.activity_list_users.*
 
 class ListUsersActivity : AppCompatActivity() {
 
@@ -23,6 +25,19 @@ class ListUsersActivity : AppCompatActivity() {
         if (checkAndRequestPermissions()) {
 
         }
+        initViews()
+    }
+
+    private fun initViews() {
+
+        fab_add_user.setOnClickListener {
+            startAddUserFeature()
+        }
+    }
+
+    private fun startAddUserFeature() {
+        val i = Intent(this@ListUsersActivity, AddUserActivity::class.java)
+        startActivity(i)
     }
 
     private fun checkAndRequestPermissions(): Boolean {

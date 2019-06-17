@@ -72,6 +72,9 @@ dependencies {
     implementation deps.glide.runtime
     kapt deps.glide.compiler
 
+    //code scanner
+    implementation deps.codeScanner.scanner
+
     //room
     implementation deps.room.runtime
     kapt deps.room.compiler
